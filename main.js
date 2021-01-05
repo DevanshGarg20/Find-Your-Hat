@@ -15,17 +15,25 @@ class Field {
 
   print(){
     for(let i = 0; i < this.field.length; i++){
-      console.log(this.field[i].join(''))
+      console.log(this.field[i].join(" "))
     }
   }
 
   static generateField(height, width , percentage = 0.1){
 
+    const field = new Array(height).fill(0).map(el => new Array(width));
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const prob = Math.random();
+        field[y][x] = prob > percentage ? fieldCharacter : hole;
+      }
+    }
+    // random hat location
     const hatLocation = {
       x: Math.floor(Math.random() * width),
       y: Math.floor(Math.random() * height)
     };
-    
+
     field[hatLocation.y][hatLocation.x] = hat;
     return field;
 
@@ -92,11 +100,7 @@ class Field {
 
 }
 
-const myField = new Field([
-  ['*', '░', 'O'],
-  ['░', 'O', '░'],
-  ['░', '^', '░'],
-]);
+const myField = new Field(Field.generateField(10, 10, 0.2));
 
 myField.run()
 
