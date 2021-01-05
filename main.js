@@ -19,7 +19,15 @@ class Field {
     }
   }
 
-  static generateField(height, width , percentage){
+  static generateField(height, width , percentage = 0.1){
+
+    const hatLocation = {
+      x: Math.floor(Math.random() * width),
+      y: Math.floor(Math.random() * height)
+    };
+    
+    field[hatLocation.y][hatLocation.x] = hat;
+    return field;
 
   }
   // helper methods
